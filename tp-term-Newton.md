@@ -1,19 +1,11 @@
----
-title: TP Python 2 - Mécanique et 2e loi de Newton
-tags: physique-chimie, terminale, python, numpy, matplotlib
----
-
 # TP Python n°2 – Mécanique : 2ᵉ loi de Newton
-
-[TOC]
 
 **Niveau :** Terminale, spécialité Physique-Chimie | **Durée :** 1 h
 **Outils :** Python 3, `numpy`, `matplotlib` (Capytale, Jupyter, Spyder, Edupython…)
 **Objectif :** exploiter le pointage d'un mouvement avec Python (à la place d'un tableur) pour vérifier la 2ᵉ loi de Newton, puis confronter les mesures à un modèle théorique.
 
-:::info
-**Comment travailler :** les codes sont déjà écrits. Vous devez **lire les commentaires (`#`)**, **remplacer les `___`**, **exécuter dans votre éditeur Python**, puis **répondre aux questions de physique**. Revenez à l'aide-mémoire dès que vous hésitez.
-:::
+> [!NOTE]
+> **Comment travailler :** les codes sont déjà écrits. Vous devez **lire les commentaires (`#`)**, **remplacer les `___`**, **exécuter dans votre éditeur Python**, puis **répondre aux questions de physique**. Revenez à l'aide-mémoire dès que vous hésitez.
 
 | Partie | Contenu | Durée |
 |---|---|---|
@@ -68,13 +60,12 @@ plt.axis("equal")                      # même échelle sur x et y (pour une tra
 
 ### Si Python affiche une erreur
 
-:::warning
-- `NameError` : faute de frappe dans un nom, ou une cellule précédente n'a pas été exécutée.
-- `SyntaxError` : parenthèse, guillemet ou virgule oublié (regarder la ligne indiquée et la précédente).
-- `ValueError … same first dimension` : les deux tableaux n'ont pas la même longueur.
-- Il reste des `___` : un trou n'a pas été complété.
-- Deux courbes dans un même graphique alors que vous en vouliez deux : il manque `plt.figure()`.
-:::
+> [!WARNING]
+> - `NameError` : faute de frappe dans un nom, ou une cellule précédente n'a pas été exécutée.
+> - `SyntaxError` : parenthèse, guillemet ou virgule oublié (regarder la ligne indiquée et la précédente).
+> - `ValueError … same first dimension` : les deux tableaux n'ont pas la même longueur.
+> - Il reste des `___` : un trou n'a pas été complété.
+> - Deux courbes dans un même graphique alors que vous en vouliez deux : il manque `plt.figure()`.
 
 ## Partie A – Projectile et 2ᵉ loi de Newton
 
@@ -176,9 +167,12 @@ print("a_y moyen =", ay[1:-1].mean())    # [1:-1] : on enlève les deux extrémi
 
 Les points sont dispersés. Pourquoi ? Comparez la moyenne à $-g$.
 
-:::spoiler Indice pour Q6
+<details>
+<summary>Indice pour Q6</summary>
+
 On dérive **deux fois** des positions pointées à environ un millimètre près : l'incertitude est amplifiée à chaque dérivation.
-:::
+
+</details>
 
 **Q7.** Méthode plus précise : on ajuste $y(t)$ par un polynôme de degré 2, $y = c_2 t^2 + c_1 t + c_0$. En dérivant deux fois, on trouve $a_y = 2c_2$.
 
@@ -267,45 +261,47 @@ print("t_vol =", round(t_vol, 2), "s")
 print("portée =", round(portee, 2), "m")
 ```
 
-:::spoiler Indice pour la formule de y_max
+<details>
+<summary>Indice pour la formule de y_max</summary>
+
 $y_{max} = y(t_s) = \dfrac{v_{0y}^2}{2g}$ : remplacez $t$ par $t_s = \dfrac{v_{0y}}{g}$ dans $y(t)$.
-:::
+
+</details>
 
 ## Pour aller plus loin (si vous avez terminé)
 
-:::success
-Simulation de la 2ᵉ loi de Newton pas à pas (programme fourni, rien à compléter). À chaque petit pas de temps `dt`, on met à jour la vitesse puis la position :
-
-```python
-dt = 0.001                  # pas de temps (s)
-n = 640                     # nombre de pas
-
-xs = np.zeros(n)            # tableaux remplis de zéros
-ys = np.zeros(n)
-vxs = np.zeros(n)
-vys = np.zeros(n)
-vxs[0] = v0x                # conditions initiales
-vys[0] = v0y
-
-for i in range(n - 1):                    # on répète n-1 fois
-    vxs[i+1] = vxs[i]                     # a_x = 0
-    vys[i+1] = vys[i] - g * dt            # a_y = -g
-    xs[i+1] = xs[i] + vxs[i+1] * dt       # nouvelle position
-    ys[i+1] = ys[i] + vys[i+1] * dt
-
-plt.figure()
-plt.plot(x, y, "o", label="mesures")
-plt.plot(xs, ys, "-", label="simulation")
-plt.axis("equal")
-plt.xlabel("x (m)")
-plt.ylabel("y (m)")
-plt.legend()
-plt.grid(True)
-plt.show()
-```
-
-Que se passe-t-il si vous prenez un pas `dt = 0.04` avec `n = 16` ? Pourquoi `dt` doit-il être petit ?
-:::
+> [!TIP]
+> Simulation de la 2ᵉ loi de Newton pas à pas (programme fourni, rien à compléter). À chaque petit pas de temps `dt`, on met à jour la vitesse puis la position :
+>
+> ```python
+> dt = 0.001                  # pas de temps (s)
+> n = 640                     # nombre de pas
+>
+> xs = np.zeros(n)            # tableaux remplis de zéros
+> ys = np.zeros(n)
+> vxs = np.zeros(n)
+> vys = np.zeros(n)
+> vxs[0] = v0x                # conditions initiales
+> vys[0] = v0y
+>
+> for i in range(n - 1):                    # on répète n-1 fois
+>     vxs[i+1] = vxs[i]                     # a_x = 0
+>     vys[i+1] = vys[i] - g * dt            # a_y = -g
+>     xs[i+1] = xs[i] + vxs[i+1] * dt       # nouvelle position
+>     ys[i+1] = ys[i] + vys[i+1] * dt
+>
+> plt.figure()
+> plt.plot(x, y, "o", label="mesures")
+> plt.plot(xs, ys, "-", label="simulation")
+> plt.axis("equal")
+> plt.xlabel("x (m)")
+> plt.ylabel("y (m)")
+> plt.legend()
+> plt.grid(True)
+> plt.show()
+> ```
+>
+> Que se passe-t-il si vous prenez un pas `dt = 0.04` avec `n = 16` ? Pourquoi `dt` doit-il être petit ?
 
 ## Compte rendu
 
