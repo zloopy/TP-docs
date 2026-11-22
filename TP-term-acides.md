@@ -1,4 +1,4 @@
-# TP Python n°1 – Chimie : acides, bases et constantes d'équilibre
+# TP Python – Chimie : acides, bases et constantes d'équilibre
 
 **Niveau :** Terminale, spécialité Physique-Chimie | **Durée :** 1 h
 **Outils :** Python 3, `numpy`, `matplotlib` (Capytale, Jupyter, Spyder, Edupython…)
