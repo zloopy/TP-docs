@@ -210,7 +210,7 @@ C = np.array([1e-1, 1e-2, 1e-3, 1e-4])        # mol/L  (1e-2 signifie 10^-2)
 pH_sol = np.array([2.88, 3.39, 3.91, 4.47])
 ```
 
-On rappelle que $\tau = \dfrac{x_f}{x_{max}} = \dfrac{[\mathrm{H_3O^+}]_f}{C}$ et que $Q_{r,éq} = \dfrac{[\mathrm{H_3O^+}]^2}{C - [\mathrm{H_3O^+}]}$ pour un acide faible dans l'eau.
+On rappelle que $\tau = \dfrac{x_f}{x_{max}} = \dfrac{[\mathrm{H_3O^+}]}{C}$ et que $Q_{r,éq} = \dfrac{[\mathrm{H_3O^+}]^2}{C - [\mathrm{H_3O^+}]}$ pour un acide faible dans l'eau.
 
 **Q11.** Complétez, exécutez et lisez les résultats :
 
