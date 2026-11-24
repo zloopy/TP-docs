@@ -179,7 +179,7 @@ print("K =", K)
 
 Les proportions de HA et de A⁻ en fonction du pH sont :
 
-$$\%\mathrm{HA} = \frac{100}{1 + 10^{\mathrm{pH} - \mathrm{p}K_A}} \qquad \%\mathrm{A^-} = 100 - \%\mathrm{HA}$$
+$\%\mathrm{HA} = \frac{100}{1 + 10^{\mathrm{pH} - \mathrm{p}K_A}} \qquad \%\mathrm{A^-} = 100 - \%\mathrm{HA}$
 
 **Q9.** Lisez le code, complétez les trous, puis exécutez.
 
