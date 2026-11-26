@@ -1,83 +1,76 @@
-# Fiche méthode : équations différentielles du premier ordre
+# Fiche méthode : équations différentielles d'ordre 1
 
-## 1. Variables séparables
+Une équation différentielle d'ordre 1 relie une fonction $y(x)$ à sa dérivée $y'(x)$. Ici, on étudie les équations de la forme
 
-**Forme :** $y' = f(x)\,g(y)$
+$$y' + ay = f(x)$$
 
-**Méthode :**
-1. Séparer : $\dfrac{dy}{g(y)} = f(x)\,dx$
-2. Intégrer les deux membres : $\displaystyle\int \dfrac{dy}{g(y)} = \int f(x)\,dx + C$
-3. Résoudre si possible en $y$.
-4. Ne pas oublier les **solutions constantes** $y = y_0$ où $g(y_0) = 0$.
+où $a$ est un nombre réel fixé.
 
-**Exemple :** $y' = xy^2 \Rightarrow -\dfrac{1}{y} = \dfrac{x^2}{2} + C \Rightarrow y = \dfrac{-2}{x^2 + K}$
+- Si $f(x) = 0$, l'équation est **sans second membre** (ou « à membre nul »).
+- Sinon, $f(x)$ est le **second membre**.
 
 ---
 
-## 2. Équations linéaires d'ordre 1
+## 1. Équation sans second membre : $y' + ay = 0$
 
-**Forme :** $y' + a(x)\,y = b(x)$
+**Solution générale :**
 
-**Méthode (facteur intégrant) :**
-1. Calculer $A(x) = \displaystyle\int a(x)\,dx$ (sans constante).
-2. Poser le facteur intégrant $\mu(x) = e^{A(x)}$.
-3. Multiplier : $(\mu y)' = \mu\, b$.
-4. Intégrer : $y = \dfrac{1}{\mu(x)}\left(\displaystyle\int \mu(x)\,b(x)\,dx + C\right)$.
+$$y(x) = C\,e^{-ax}, \qquad C \in \mathbb{R}$$
 
-**Rappel :** la solution générale = solution homogène $y_h = C e^{-A(x)}$ + une solution particulière.
-
-**Exemple :** $y' + 2y = e^x$ a pour solution $y = \dfrac{e^x}{3} + C e^{-2x}$.
+**Exemple :** $y' = 3y$ s'écrit $y' - 3y = 0$, donc $y(x) = C\,e^{3x}$.
 
 ---
 
-## 3. Équations de Bernoulli
+## 2. Équation avec second membre constant : $y' + ay = b$
 
-**Forme :** $y' + a(x)\,y = b(x)\,y^\alpha$, avec $\alpha \neq 0$ et $\alpha \neq 1$
+**Étape 1 : solution particulière constante.** Si $y$ est constante ($y' = 0$), l'équation devient $ay = b$, donc :
 
-**Méthode :**
-1. Poser $z = y^{1-\alpha}$.
-2. Vérifier que $z' + (1-\alpha)\,a(x)\,z = (1-\alpha)\,b(x)$ : c'est une équation **linéaire** en $z$.
-3. Résoudre en $z$, puis revenir à $y = z^{1/(1-\alpha)}$.
+$$y_p(x) = \frac{b}{a} \quad (a \neq 0)$$
 
-**Piège :** pour $\alpha \neq 1$, ne pas oublier que $y = 0$ est aussi une solution.
+**Étape 2 : solution générale.** On ajoute la solution sans second membre :
 
----
+$$y(x) = C\,e^{-ax} + \frac{b}{a}$$
 
-## 4. Équations homogènes
-
-**Forme :** $y' = f\!\left(\dfrac{y}{x}\right)$
-
-**Méthode :**
-1. Poser $u = \dfrac{y}{x}$, donc $y = ux$ et $y' = u + xu'$.
-2. Obtenir $x\,u' = f(u) - u$, équation à **variables séparables** en $u$.
-3. Résoudre, puis revenir à $y = x\,u(x)$.
-
-**Exemple :** $y' = 1 + \dfrac{y}{x}$ donne $u = \ln|x| + C$, soit $y = x\ln|x| + Cx$.
+**Exemple :** $y' + y = 4$ donne $y_p = 4$ et $y(x) = C\,e^{-x} + 4$.
 
 ---
 
-## 5. Équations exactes (bonus)
+## 3. Second membre polynomial ou exponentiel
 
-**Forme :** $M(x,y)\,dx + N(x,y)\,dy = 0$
+Il faut **deviner la forme** de la solution particulière, puis trouver ses coefficients en la remplaçant dans l'équation.
 
-**Test :** l'équation est exacte si $\dfrac{\partial M}{\partial y} = \dfrac{\partial N}{\partial x}$.
+| Second membre $f(x)$ | Forme de $y_p$ à essayer |
+|---|---|
+| Nombre constant $b$ | $y_p = K$ |
+| Polynôme de degré 1, $px + q$ | $y_p = Px + Q$ |
+| Exponentielle $k\,e^{mx}$ | $y_p = K\,e^{mx}$ |
 
-**Méthode :** il existe $F(x,y)$ telle que $\dfrac{\partial F}{\partial x} = M$ et $\dfrac{\partial F}{\partial y} = N$. Les solutions sont données par $F(x,y) = C$.
-
----
-
-## 6. Problème de Cauchy
-
-Une condition initiale $y(x_0) = y_0$ permet de déterminer la constante $C$ après avoir trouvé la solution générale.
+**Exemple :** $y' + y = 3x + 1$. On cherche $y_p = Px + Q$, donc $y_p' = P$. En remplaçant : $P + Px + Q = 3x + 1$, d'où $P = 3$ et $Q = -2$. Donc $y_p = 3x - 2$ et $y(x) = C\,e^{-x} + 3x - 2$.
 
 ---
 
-## Tableau récapitulatif
+## 4. Méthode générale en 4 étapes
 
-| Type | Reconnaître | Méthode principale |
-|---|---|---|
-| Variables séparables | $y' = f(x)g(y)$ | Séparer et intégrer |
-| Linéaire | $y' + a(x)y = b(x)$ | Facteur intégrant $e^{\int a}$ |
-| Bernoulli | terme $y^\alpha$ | Substitution $z = y^{1-\alpha}$ |
-| Homogène | $y' = f(y/x)$ | Substitution $u = y/x$ |
-| Exacte | $M\,dx + N\,dy = 0$ | Potentiel $F$ |
+1. **Écrire l'équation** sous la forme $y' + ay = f(x)$.
+2. **Résoudre l'équation sans second membre** $y' + ay = 0$ : on obtient $y_h = C\,e^{-ax}$.
+3. **Trouver une solution particulière** $y_p$ (constante, polynomiale ou exponentielle selon $f$).
+4. **Solution générale :** $y = y_h + y_p$.
+
+---
+
+## 5. Solution particulière et condition initiale
+
+La solution générale contient une constante $C$. Une **condition initiale** $y(x_0) = y_0$ permet de trouver la solution **particulière** unique.
+
+**Exemple :** $y' + 2y = 4$ avec $y(0) = 1$.
+- $y_p = 2$, donc $y(x) = C\,e^{-2x} + 2$.
+- $y(0) = C + 2 = 1$, donc $C = -1$.
+- Solution particulière : $y(x) = 2 - e^{-2x}$.
+
+---
+
+## Résumé
+
+- **Solution générale** : $y = y_h + y_p$, avec une constante $C$.
+- **Solution particulière** : la solution obtenue après avoir fixé $C$ avec une condition initiale.
+- **Vérification** : remplacer $y$ et $y'$ dans l'équation pour contrôler le résultat.
